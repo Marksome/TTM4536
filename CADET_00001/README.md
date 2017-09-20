@@ -20,18 +20,19 @@ The binary contains an easter egg and a stack buffer overflow.
 0804861e <transmit>
 0804865c <receive>
 0804872a <main>
-08048808 <check>```
+08048808 <check>
+```
 
 #### Find segmentation fault:  
 `python -c "print 'a'*79" | ./CADET_00001.adapted`
 ```Welcome to Palindrome Finder
-        Please enter a possible palindrome: Segmentation fault```
+        Please enter a possible palindrome: Segmentation fault
+```
 - This means that we can control the return address
 
 #### Find Easter Egg:
 `echo '^' | ./CADET_00001.adapted`
-```
-Welcome to Palindrome Finder
+```Welcome to Palindrome Finder
         Please enter a possible palindrome: 
 EASTER EGG!
                 Yes, that's a palindrome!
