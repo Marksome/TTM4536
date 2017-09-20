@@ -43,7 +43,7 @@ EASTER EGG!
 
 #### Using python:
 To enable running the program locally and connect through a socket, first create a new tab and type:  
-`nc -nvlp 4536 -e CADET_00001.adapted`  
+`socat TCP-LISTEN:4536,reuseaddr,fork EXEC:"./CADET_00001.adapted"&`  
 Then in the python script use:
 ```
 #!/usr/bin/env python
