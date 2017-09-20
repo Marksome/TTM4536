@@ -15,7 +15,8 @@ The binary contains an easter egg and a stack buffer overflow.
 `objdump -d CADET\_00001.adapted > CADET\_00001.dump`
 
 #### Function addresses from dump:  
-```080484dd <transmit_all>
+```
+080484dd <transmit_all>
 0804856c <receive_delim>
 0804861e <transmit>
 0804865c <receive>
@@ -25,14 +26,16 @@ The binary contains an easter egg and a stack buffer overflow.
 
 #### Find segmentation fault:  
 `python -c "print 'a'*79" | ./CADET_00001.adapted`
-```Welcome to Palindrome Finder
+```
+Welcome to Palindrome Finder
         Please enter a possible palindrome: Segmentation fault
 ```
 - This means that we can control the return address
 
 #### Find Easter Egg:
 `echo '^' | ./CADET_00001.adapted`
-```Welcome to Palindrome Finder
+```
+Welcome to Palindrome Finder
         Please enter a possible palindrome: 
 EASTER EGG!
                 Yes, that's a palindrome!
