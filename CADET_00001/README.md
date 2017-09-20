@@ -41,6 +41,19 @@ EASTER EGG!
                 Yes, that's a palindrome!
 ```
 
+#### Using python:
+To enable running the program locally and connect through a socket, first create a new tab and type:  
+`nc -nvlp 4536 -e CADET_00001.adapted`  
+Then in the python script use:
+```
+#!/usr/bin/env python
+import socket, telnetlib
+sock = socket.socket()
+sock.connect(('localhost', 4536))
+t = telnetlib.Telnet()
+t.sock = sock
+t.interact()
+``` 
 
 ## Descriptions
 
