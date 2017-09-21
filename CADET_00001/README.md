@@ -1,7 +1,7 @@
 # Project - CADET_00001
 CADET\_00001 is one of the challenge released by DARPA for the [Cyber Grand Challenge](https://github.com/CyberGrandChallenge/samples/tree/master/examples/CADET_00001).  
 
-## Task description:  
+## Task description  
 This is an unusually simple service written by a military cadet as his first ever C program. It is intended as a data point as an incredibly simple service, with an incredibly simple vulnerability, written by an inexperienced programmer.  
 
 The binary contains an easter egg and a stack buffer overflow.  
@@ -13,7 +13,11 @@ The stack of the program has 64 bytes allocated, the problem is that it reads 12
 This means the stack can be overflowed and the extra data will overwrite other functions and variables.  
 
 #### Description of the "angr" tool:  
-`angr` is a powerful tool if you have little to no understanding of how the executable works, or do not posess the source code.
+`angr` is a powerful tool if you have little to no understanding of how the executable works, or do not possess the source code.
+`angr` has the ability to give a control-flow and data-dependency analysis.  
+`angr` gives you the ability to symbolic execution and program instrumentation.  
+`angr` can search for ways to reach an address and try to avoid others.  
+In this project symbolic execution and data-dependency analasys will be used.  
 
 #### Decription of the idea(s) for solution:  
 In buffer overflows we feed the program with more and more data untill we receive a segmentation fault or another error. The goal is to overwrite the return address or instruction pointer. For finding the easter egg, we could brute force or disassemble and reverse engineer the program. 
@@ -61,7 +65,7 @@ EASTER EGG!
                 Yes, that's a palindrome!
 ```
 
-## Introduction to using the different tools:  
+## Introduction to using the different tools  
 
 #### Debugging:  
 Using objdump, gdb or radare2 you can disassemble and find out how the program flow works. 
