@@ -64,7 +64,7 @@ Using objdump, gdb or radare2 you can disassemble and find out how the program f
 
 #### Using radare2:
 `r2 -AA CADET_00001.adapted`
-Then type v, then v and enter to visualize.
+Then type vv and enter to visualize.  
 Here we can see two intesting addresses we would like to try with angr.
 ```
 0x080487ac      mov dword [esp + local_4h], str._t_tNope__that_s_not_a_palindrome_n_n
