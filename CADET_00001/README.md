@@ -1,19 +1,19 @@
 # Project - CADET_00001
 CADET\_00001 is one of the challenge released by DARPA for the [Cyber Grand Challenge](https://github.com/CyberGrandChallenge/samples/tree/master/examples/CADET_00001).  
 
-## Task description  
+## Descriptions
+
+#### Task description:  
 This is an unusually simple service written by a military cadet as his first ever C program. It is intended as a data point as an incredibly simple service, with an incredibly simple vulnerability, written by an inexperienced programmer.  
 
 The binary contains an easter egg and a stack buffer overflow.  
-
-## Descriptions
 
 #### Description of the problem:  
 The stack of the program has 64 bytes allocated, the problem is that it reads 128 bytes at a time.  
 This means the stack can be overflowed and the extra data will overwrite other functions and variables.  
 
 #### Description of the "angr" tool:  
-`angr` is a powerful tool if you have little to no understanding of how the executable works, or do not possess the source code.
+`angr` is a powerful tool if you have little to no understanding of how the executable works, or don't have the source code.  
 `angr` has the ability to give a control-flow and data-dependency analysis.  
 `angr` gives you the ability to symbolic execution and program instrumentation.  
 `angr` can search for ways to reach an address and try to avoid others.  
