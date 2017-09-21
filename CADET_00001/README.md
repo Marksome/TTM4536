@@ -14,10 +14,9 @@ This means the stack can be overflowed and the extra data will overwrite other f
 
 #### Description of the "angr" tool:  
 `angr` is a powerful tool if you have little to no understanding of how the executable works, or don't have the source code.  
-`angr` has the ability to give a control-flow and data-dependency analysis.  
-`angr` gives you the ability to symbolic execution and program instrumentation.  
-`angr` can search for ways to reach an address and try to avoid others.  
-In this project symbolic execution and data-dependency analasys will be used.  
+`angr` has the ability to give a control-flow analysis, data-dependency analysis, symbolic execution and program instrumentation.  
+`angr` can also search for ways to reach an address and try to avoid others.  
+In this project symbolic execution and data-dependency analysis will be used.  
 
 #### Decription of the idea(s) for solution:  
 In buffer overflows we feed the program with more and more data untill we receive a segmentation fault or another error. The goal is to overwrite the return address or instruction pointer. For finding the easter egg, we could brute force or disassemble and reverse engineer the program. 
