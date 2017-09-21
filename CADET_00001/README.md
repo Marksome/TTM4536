@@ -6,7 +6,26 @@ This is an unusually simple service written by a military cadet as his first eve
 
 The binary contains an easter egg and a stack buffer overflow.  
 
+## Descriptions
+
+#### Description of the problem:  
+The stack of the program has 64 bytes allocated, the problem is that it reads 128 bytes at a time.  
+This means the stack can be overflowed and the extra data will overwrite other functions and variables.  
+
+#### Description of the "angr" tool:  
+`angr` is a powerful tool if you have little to no understanding of how the executable works, or do not posess the source code.
+
+#### Decription of the idea(s) for solution:  
+In buffer overflows we feed the program with more and more data untill we receive a segmentation fault or another error. The goal is to overwrite the return address or instruction pointer. For finding the easter egg, we could brute force or disassemble and reverse engineer the program. 
+
+#### Description of the specific functions used in the solution:  
+To disassemble and analyse the executable I used gdb-peda and radare2. 
+In the first solution I used bash to find the segmentation fault and the easter egg.  
+In the second solution I used python to transmit the data through a socket.  
+In the third solution I used python with angr to 
+
 ## Workflow
+
 #### Check filetype:  
 `file CADET\_00001.adapted`  
 - ELF 32-bit LSB executable  
@@ -42,6 +61,36 @@ EASTER EGG!
                 Yes, that's a palindrome!
 ```
 
+## Introduction to using the different tools:  
+
+#### Debugging:  
+Using objdump, gdb or radare2 you can disassemble and find out how the program flow works. 
+
+#### Using gdb:  
+`gdb ./CADET_00001.adapted`  
+Then you can use the different functions listed below.  
+```
+run
+next
+break <function> or *<address>
+disassemble <function>
+info <register, stack, etc.>
+print <function>
+x/<bytes>x $<pointer>
+```  
+To find the size of the stack compare the base pointer ($ebp) with the stack pointer ($esp).  
+`x/2x $ebp`  
+`x/64x $esp` 
+
+#### Using radare2:
+`r2 -AA CADET_00001.adapted`  
+Then type vv and enter to visualize.  
+Here we can see two intesting addresses we would like to try with angr.
+```
+0x080487ac      mov dword [esp + local_4h], str._t_tNope__that_s_not_a_palindrome_n_n
+0x080487d8      mov dword [esp + local_4h], str._t_tYes__that_s_a_palindrome__n_n
+```
+
 #### Using python:
 To enable running the program locally and connect through a socket, first create a new tab and type:  
 `socat TCP-LISTEN:4536,reuseaddr,fork EXEC:"./CADET_00001.adapted"&`  
@@ -58,31 +107,18 @@ t.interact()
 ``` 
 Now you can interact directly because of telnetlib, and you can add things to the python script as you progress.
 
-#### Debugging:
-Using objdump, gdb or radare2 you can disassemble and find out how the program flow works. 
-
-
-#### Using radare2:
-`r2 -AA CADET_00001.adapted`
-Then type vv and enter to visualize.  
-Here we can see two intesting addresses we would like to try with angr.
-```
-0x080487ac      mov dword [esp + local_4h], str._t_tNope__that_s_not_a_palindrome_n_n
-0x080487d8      mov dword [esp + local_4h], str._t_tYes__that_s_a_palindrome__n_n
-```
-
 #### Using angr:
-To try and explore the two addresses shown above we use angr with its function explore.
-`ex = p.surveyors.Explorer(find=(0x080487d8,), avoid=(0x080487ac,))`
+Basic setup:
+```
+#!/usr/bin/env python
+import angr
 
+def main():
+	project = angr.Project("./CADET_00001.adapted")
 
-## Descriptions
-
-#### Description of the problem:  
-
-#### Description of the "angr" tool:  
-
-#### Decription of the idea(s) for solution:  
-
-#### Description of the specific functions used in the solution:  
+if __name__ == '__main__':
+    print main()
+```  
+To try and explore the find and avoid the addresses found in debugging we can use angr with its function 'explorer'.  
+`explorer = project.surveyors.Explorer(find=(0x080487d8,), avoid=(0x080487ac,))`  
 
