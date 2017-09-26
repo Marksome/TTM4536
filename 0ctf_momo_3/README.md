@@ -16,10 +16,19 @@
 ## Workflow
 
 #### Check filetype:  
+`file momo`  
+- ELF 32-bit LSB executable  
 
 #### Create dump file:  
+`objdump -d -M Intel momo > momo.dump`
 
-#### Function addresses from dump:  
+#### Interesting observations from dump:  
+```
+mov    %eax,0x83fe864
+mov    0x81fe6d0,%eax
+mov    0x83fe860(,%ecx,4),%eax
+```
+These operations are used multiple times. This gives some idea of text or information is moved to `0x81fe6d0` multiple times. 
 
 ## Introduction to using the different tools  
 
