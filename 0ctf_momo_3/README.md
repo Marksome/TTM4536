@@ -78,7 +78,7 @@ Basic setup:
 import angr
 
 def main():
-	project = angr.Project("./momo")
+	project = angr.Project("./momo", load_options={'auto_load_libs': False})
 
 if __name__ == '__main__':
     print main()
