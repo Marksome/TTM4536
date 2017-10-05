@@ -27,6 +27,7 @@
 mov    %eax,0x83fe864
 mov    0x81fe6d0,%eax
 mov    0x83fe860(,%ecx,4),%eax
+mov    ds:0x8055740,eax
 ```
 These operations are used multiple times. This gives some idea of text or information is moved to `0x81fe6d0` multiple times. 
 
