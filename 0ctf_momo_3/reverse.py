@@ -1,7 +1,7 @@
 #!/usr/bin/python
 from pwn import *
 
-f = open('b.gdb' ,'r')
+f = open('breakpoints' ,'r')
 commands = f.read()
 f.close()
 
