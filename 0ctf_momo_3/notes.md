@@ -7,3 +7,7 @@ mov    al,BYTE PTR [eax+edx*1] #noe morro
 0x8053573:   mov    ds:0x805574c,eax # Congratulations
 0x8053732:   cmp    DWORD PTR ds:0x83fe848,0x1
 0x8053739:   je     0x8048290 <puts@plt>
+
+
+break *0x8053613 # Congratulations
+break *0x8053b8c # 0ops, try again...

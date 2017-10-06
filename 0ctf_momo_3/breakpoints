@@ -52,8 +52,6 @@ break *0x80522c0
 break *0x80524c6
 break *0x80527cd
 break *0x80528c3
-break *0x8053613
-break *0x8053b8c
 break *0x8052aec
 break *0x8052bca
 run < input
