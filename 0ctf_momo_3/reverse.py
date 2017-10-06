@@ -7,6 +7,7 @@ f = open('breakpoints' ,'r')
 commands = f.read()
 f.close()
 
+commands += 'run < input\n'
 commands += 'python exec(open("commands.py").read())\n'
 
 
