@@ -19,7 +19,7 @@ for i in range(0,27):
 		flag += chr(a-b)
 
 
-flag += chr(int(gdb.parse_and_eval('$edx'))) # }
+flag += chr(int(gdb.parse_and_eval('$edx')))
 
 f = open('flag', 'w')
 f.write(flag + '\n')
