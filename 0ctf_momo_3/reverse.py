@@ -1,7 +1,7 @@
 #!/usr/bin/python
 from pwn import *
 import time
-import os
+import subprocess
 
 f = open('breakpoints' ,'r')
 commands = f.read()
@@ -10,10 +10,8 @@ f.close()
 commands += 'run < input\n'
 commands += 'python exec(open("commands.py").read())\n'
 
-log.info('Starting reverse engineering...')
 momo = process('./momo')
 gdb.attach(momo, commands)
-log.success('Reverse engineering done...')
 
 read = False
 while not read:
@@ -26,6 +24,9 @@ while not read:
         time.sleep(0.5)
 
 log.info('Running program with input "flag":')
-os.system("./momo < flag")
-
-log.success('Flag found: %s', flag)
+momo = subprocess.Popen(["./momo < flag"], stdout=subprocess.PIPE, shell=True)
+out = momo.stdout.read()
+if 'Congratulations!' in out:
+    log.success('Flag found: %s', flag)
+else:
+    log.warning('Flag not found: %s', flag)
